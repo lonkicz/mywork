@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+    <property name="APP_NAME" value="weixinsf" />
+    <property name="LOG_FILE_DIR" value="/opt/logs/${APP_NAME}/" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date %-5level [%logger{36}:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+	<!-- 
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_FILE_DIR}/${APP_NAME}.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%date %-5level [%logger{36}:%line] %msg%n</pattern>
+        </encoder>
+    </appender>
+     -->
+    <appender name="RollingFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE_DIR}${APP_NAME}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date %-5level [%logger{36}:%line] %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="MSG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE_DIR}MSG.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date %-5level [%logger{36}:%line] %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="DataClear" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE_DIR}dataclear.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date %-5level [%logger{36}:%line] %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <root level="INFO">
+        <appender-ref ref="RollingFILE" />
+        <appender-ref ref="STDOUT" />
+    </root>
+
+    <logger name="com.comdosoft" level="DEBUG" />
+    <logger name="msgifc" level="DEBUG" additivity="false">
+    	<appender-ref ref="MSG" />  
+    </logger>
+    <logger name="com.comdosoft.financial.manage.service.DataClearService" level="INFO" additivity="false">
+    	<appender-ref ref="DataClear" />  
+    </logger>
+</configuration>
