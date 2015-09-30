@@ -60,7 +60,4 @@
     <logger name="msgifc" level="DEBUG" additivity="false">
     	<appender-ref ref="MSG" />  
     </logger>
-    <logger name="com.comdosoft.financial.manage.service.DataClearService" level="INFO" additivity="false">
-    	<appender-ref ref="DataClear" />  
-    </logger>
 </configuration>

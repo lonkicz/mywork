@@ -26,4 +26,15 @@
 		<property name="freemarkerSettings" ref="freemarkerConfiguration" />
 		<property name="defaultEncoding" value="utf-8" />
     </bean>
+    <bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.126.com"/>
+        <property name="port" value="25"/>
+        <property name="username" value="caozhen19891217@126.com"/>
+        <property name="password" value="cz65712521"/>
+        <property name="javaMailProperties">
+            <props >
+                <prop key="mail.smtp.auth">true</prop>
+            </props>
+        </property>
+    </bean>
 </beans>
